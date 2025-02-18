@@ -1,101 +1,198 @@
-import Image from "next/image";
+  "use client";
+  import Image from "next/image";
+  import Link from "next/link";
+  import { FiUsers, FiClipboard, FiHome, FiDollarSign, FiBarChart } from "react-icons/fi";
+  import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+  import { Card } from "../Components/ui/card";
+  import { CardHeader } from "../Components/ui/card-header";
+  import { CardContent } from "../Components/ui/card-content";
+  import { ProgressBar } from "../Components/ui/progress-bar";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  export default function Dashboard() {
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    const pp = {
+      workers: 70,  // Statistik agen kuli
+      tasks: 120,  // Statistik tugas yang selesai
+      clients: 150,  // Statistik klien
+      transactions: 300  // Statistik transaksi sukses
+    };
+
+    const totalStats = {
+      workers: 100,
+      tasks: 200,
+      clients: 200,
+      transactions: 500
+    };
+
+    const stats = {
+      workers: [{ name: "Worker A", value: 20 }, { name: "Worker B", value: 35 }, { name: "Worker C", value: 15 }],
+      tasks: [{ name: "Jan", value: 50 }, { name: "Feb", value: 80 }, { name: "Mar", value: 40 }],
+      clients: [{ name: "Active", value: 120 }, { name: "Inactive", value: 30 }],
+      transactions: [{ name: "Success", value: 200 }, { name: "Pending", value: 50 }, { name: "Failed", value: 10 }]
+    };
+
+    const charts = [
+      { title: "Grafik Agen Kuli", data: stats.workers, icon: <FiHome className="text-black" />, color: "#000000" },
+      { title: "Grafik Tugas", data: stats.tasks, icon: <FiBarChart className="text-black" />, color: "#000000" },
+      { title: "Grafik Klien", data: stats.clients, icon: <FiUsers className="text-black" />, color: "#000000" },
+      { title: "Grafik Transaksi", data: stats.transactions, icon: <FiDollarSign className="text-black" />, color: "#000000" }
+    ];
+
+    return (
+
+      <div className="p-6 bg-gray-100 min-h-screen text-black">
+        <br />
+        <br />
+        <br />
+        <div className="flex justify-center items-center">
+          <Image src="/images/logo.png" alt="Agen Kuli Logo" width={150} height={50} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+        <br />
+
+        <div className="text-left mb-8">
+          <h2 className="text-3xl font-semibold">Statistik Agen Kuli</h2>
+          <p className="text-xl text-black mt-2">Lihat statistik terkait Agen Kuli, Tugas yang diselesaikan, Klien yang dilayani, dan Transaksi</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Kartu untuk statistik Workers */}
+          <Card className="bg-white text-black border border-white shadow-lg">
+            <CardHeader title={<span className="text-black">Agen Kuli</span>} icon={<FiHome className="text-black" />} />
+            <CardContent>
+              <div className="text-xl font-bold">{pp.workers} / {totalStats.workers}</div>
+              <div className="w-full bg-gray-300 h-2 rounded-full">
+                <div
+                  className="h-2 rounded-full"
+                  style={{
+                    width: `${(pp.workers / totalStats.workers) * 100}%`,
+                    backgroundColor: '#000000',
+                  }}
+                />
+              </div>
+              <div className="text-sm text-black">Jumlah Agen Kuli</div>
+            </CardContent>
+          </Card>
+
+          {/* Kartu untuk statistik Tasks */}
+          <Card className="bg-white text-black border border-white shadow-lg">
+            <CardHeader title={<span className="text-black">Tugas</span>} icon={<FiClipboard className="text-black" />} />
+            <CardContent>
+              <div className="text-xl font-bold">{pp.tasks} / {totalStats.tasks}</div>
+              <div className="w-full bg-gray-300 h-2 rounded-full">
+                <div
+                  className="h-2 rounded-full"
+                  style={{
+                    width: `${(pp.tasks / totalStats.tasks) * 100}%`,
+                    backgroundColor: '#000000',
+                  }}
+                />
+              </div>
+              <div className="text-sm text-black">Tugas yang diselesaikan</div>
+            </CardContent>
+          </Card>
+
+          {/* Kartu untuk statistik Clients */}
+          <Card className="bg-white text-black border border-white shadow-lg">
+            <CardHeader title={<span className="text-black">Klien</span>} icon={<FiUsers className="text-black" />} />
+            <CardContent>
+              <div className="text-xl font-bold">{pp.clients} / {totalStats.clients}</div>
+              <div className="w-full bg-gray-300 h-2 rounded-full">
+                <div
+                  className="h-2 rounded-full"
+                  style={{
+                    width: `${(pp.clients / totalStats.clients) * 100}%`,
+                    backgroundColor: '#000000',
+                  }}
+                />
+              </div>
+              <div className="text-sm text-black">Klien yang dilayani</div>
+            </CardContent>
+          </Card>
+
+          {/* Kartu untuk statistik Transactions */}
+          <Card className="bg-white text-black border border-white shadow-lg">
+            <CardHeader title={<span className="text-black">Transaksi</span>} icon={<FiDollarSign className="text-black" />} />
+            <CardContent>
+              <div className="text-xl font-bold">{pp.transactions} / {totalStats.transactions}</div>
+              <div className="w-full bg-gray-300 h-2 rounded-full">
+                <div
+                  className="h-2 rounded-full"
+                  style={{
+                    width: `${(pp.transactions / totalStats.transactions) * 100}%`,
+                    backgroundColor: '#000000',
+                  }}
+                />
+              </div>
+              <div className="text-sm text-black">Transaksi berhasil</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <br />
+        <div className="text-left mb-8">
+          <h2 className="text-3xl font-semibold">Dashboard Agen Kuli</h2>
+          <p className="text-xl text-black mt-2">Lihat berbagai grafik dan statistik terkait Agen Kuli, Tugas, Klien, dan Transaksi</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Grafik untuk workers */}
+        <div className="bg-white p-4 border rounded shadow-lg">
+          <h3 className="text-xl text- font-semibold">Grafik Workers</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={stats.workers}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="value" fill="#000000" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Grafik untuk tasks */}
+        <div className="bg-white p-4 border rounded shadow-lg">
+          <h3 className="text-xl font-semibold">Grafik Tasks</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={stats.tasks}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="value" fill="#000000" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Grafik untuk clients */}
+        <div className="bg-white p-4 border rounded shadow-lg">
+          <h3 className="text-xl font-semibold">Grafik Clients</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={stats.clients}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="value" fill="#000000" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Grafik untuk transactions */}
+        <div className="bg-white p-4 border rounded shadow-lg">
+          <h3 className="text-xl font-semibold">Grafik Transactions</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={stats.transactions}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="value" fill="#000000" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+        <div className="mt-8 text-center">
+          <Link href="/" className="text-black hover:text-gray-800 hover:underline">
+            Kembali ke Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
