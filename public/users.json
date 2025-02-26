@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "Si Haisyam Tasik", "email": "john.doe@example.com" },
+    { "id": 2, "name": "Si Rouf Tasik", "email": "jane.smith@example.com" },
+    { "id": 3, "name": "Si Panja Tasik ", "email": "alice.johnson@example.com" },
+    { "id": 4, "name": "Si Teguh Tasik", "email": "bob.brown@example.com" },
+    { "id": 5, "name": "Siapa saja", "email": "charlie.white@example.com" }
+  ]

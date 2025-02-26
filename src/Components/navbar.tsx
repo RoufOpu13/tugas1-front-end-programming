@@ -25,8 +25,8 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/" className="block text-white hover:text-gray-300">
-                Klien
+              <Link href="/users" className="block text-white hover:text-gray-300">
+                User Management
               </Link>
             </li>
             <li>
@@ -51,7 +51,7 @@ export default function Navbar() {
             <Link href="/" className="hover:text-gray-600">Agen Kuli</Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-gray-600">Klien</Link>
+            <Link href="/users" className="hover:text-gray-600">User Management</Link>
           </li>
           <li>
             <Link href="/" className="hover:text-gray-600">Tugas</Link>
