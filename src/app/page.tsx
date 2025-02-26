@@ -22,13 +22,14 @@
       tasks: 200,
       clients: 200,
       transactions: 500
+      
     };
 
     const stats = {
-      workers: [{ name: "Worker A", value: 20 }, { name: "Worker B", value: 35 }, { name: "Worker C", value: 15 }],
+      workers: [{ name: "Mandor", value: 20 }, { name: "Tukang", value: 35 }, { name: "Pembantu Tukang", value: 15 }],
       tasks: [{ name: "Jan", value: 50 }, { name: "Feb", value: 80 }, { name: "Mar", value: 40 }],
-      clients: [{ name: "Active", value: 120 }, { name: "Inactive", value: 30 }],
-      transactions: [{ name: "Success", value: 200 }, { name: "Pending", value: 50 }, { name: "Failed", value: 10 }]
+      clients: [{ name: "Aktif", value: 120 }, { name: "Tidak Aktif", value: 30 }],
+      transactions: [{ name: "Berhasil", value: 200 }, { name: "Tertunda", value: 50 }, { name: "Gagal", value: 10 }]
     };
 
     const charts = [
@@ -137,7 +138,7 @@
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Grafik untuk workers */}
         <div className="bg-white p-4 border rounded shadow-lg">
-          <h3 className="text-xl text- font-semibold">Grafik Workers</h3>
+          <h3 className="text-xl text- font-semibold">Grafik Agen Kuli</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.workers}>
               <XAxis dataKey="name" />
@@ -150,7 +151,7 @@
 
         {/* Grafik untuk tasks */}
         <div className="bg-white p-4 border rounded shadow-lg">
-          <h3 className="text-xl font-semibold">Grafik Tasks</h3>
+          <h3 className="text-xl font-semibold">Grafik Tugas</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.tasks}>
               <XAxis dataKey="name" />
@@ -163,7 +164,7 @@
 
         {/* Grafik untuk clients */}
         <div className="bg-white p-4 border rounded shadow-lg">
-          <h3 className="text-xl font-semibold">Grafik Clients</h3>
+          <h3 className="text-xl font-semibold">Grafik Klien</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.clients}>
               <XAxis dataKey="name" />
@@ -176,7 +177,7 @@
 
         {/* Grafik untuk transactions */}
         <div className="bg-white p-4 border rounded shadow-lg">
-          <h3 className="text-xl font-semibold">Grafik Transactions</h3>
+          <h3 className="text-xl font-semibold">Grafik Transaksi</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.transactions}>
               <XAxis dataKey="name" />
