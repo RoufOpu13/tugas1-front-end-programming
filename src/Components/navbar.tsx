@@ -21,22 +21,22 @@ export default function Navbar() {
             </li>
             <li>
               <Link href="/" className="block text-white hover:text-gray-300">
-                Agen Kuli
+                Ruangan
               </Link>
             </li>
             <li>
               <Link href="/users" className="block text-white hover:text-gray-300">
-                User Management
+                Pengguna
               </Link>
             </li>
             <li>
-              <Link href="/" className="block text-white hover:text-gray-300">
+              <Link href="/tugas" className="block text-white hover:text-gray-300">
                 Tugas
               </Link>
             </li>
             <li>
               <Link href="/" className="block text-white hover:text-gray-300">
-                Transaksi
+                Booking
               </Link>
             </li>
           </ul>
@@ -48,16 +48,16 @@ export default function Navbar() {
             <Link href="/" className="hover:text-gray-600">Dashboard</Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-gray-600">Agen Kuli</Link>
+            <Link href="/" className="hover:text-gray-600">Ruangan</Link>
           </li>
           <li>
-            <Link href="/users" className="hover:text-gray-600">User Management</Link>
+            <Link href="/users" className="hover:text-gray-600">Pengguna</Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-gray-600">Tugas</Link>
+            <Link href="/tugas" className="hover:text-gray-600">Tugas</Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-gray-600">Transaksi</Link>
+            <Link href="/" className="hover:text-gray-600">Booking</Link>
           </li>
         </ul>
 

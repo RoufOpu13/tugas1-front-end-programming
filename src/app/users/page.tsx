@@ -17,6 +17,9 @@ const Users = () => {
   const [message, setMessage] = useState("");
   const [newUser, setNewUser] = useState({ name: "", email: "" });
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5;
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/users.json");
@@ -27,16 +30,14 @@ const Users = () => {
     fetchData();
   }, []);
 
-  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      setSearchQuery(search);
-      const filtered = users.filter(user =>
-        user.name.toLowerCase().includes(search.toLowerCase()) ||
-        user.email.toLowerCase().includes(search.toLowerCase())
-      );
-      setSearchResult(filtered.length > 0 ? filtered : []);
-    }
-  };
+  useEffect(() => {
+    const filtered = users.filter(user =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setSearchResult(filtered);
+    setCurrentPage(0); // Reset ke halaman pertama saat pencarian
+  }, [searchQuery, users]);
 
   const handleDelete = (id: number) => {
     const updatedUsers = searchResult.filter(user => user.id !== id);
@@ -62,22 +63,22 @@ const Users = () => {
     setTimeout(() => setMessage(""), 2000);
   };
 
-  const handleAddNew = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newUser.name || !newUser.email) {
-      setMessage("Nama dan Email harus diisi");
-      setTimeout(() => setMessage(""), 2000);
-      return;
-    }
-
-    const newUserEntry: User = { id: users.length + 1, name: newUser.name, email: newUser.email };
-    const updatedUsers = [...users, newUserEntry];
+  const handleAddUser = () => {
+    if (!newUser.name || !newUser.email) return;
+    const newId = users.length ? users[users.length - 1].id + 1 : 1;
+    const newUserData: User = { id: newId, ...newUser };
+    const updatedUsers = [...users, newUserData];
     setUsers(updatedUsers);
     setSearchResult(updatedUsers);
     setNewUser({ name: "", email: "" });
-    setMessage("User berhasil ditambahkan");
+    setMessage("User ditambahkan");
     setTimeout(() => setMessage(""), 2000);
   };
+
+  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentUsers = searchResult.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(searchResult.length / itemsPerPage);
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
@@ -85,115 +86,140 @@ const Users = () => {
       <br />
       <br />
       <br />
-      <h1 className="text-3xl font-bold mb-6 text-center">User List</h1>
+      <h1 className="text-center text-3xl border borde-1 rounded-xl font-extrabold">Data Pengguna</h1>
+      <br />
       {message && <p className="text-green-500 text-center mb-4">{message}</p>}
-
-      {/* Form Tambah User */}
-    
 
       <input
         type="text"
-        placeholder="Search users..."
-        className="w-full p-2 text-black border border-black rounded mb-4"
+        placeholder="Cari pengguna..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        onKeyDown={handleSearch}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setSearchQuery(e.target.value); // Update searchQuery langsung
+        }}
+        className="w-full px-4 py-2 border rounded-full"
       />
+      <br />
+      <br />
+      <table className="min-w-full bg-white border rounded shadow-md">
+        <thead>
+          <tr className="bg-black text-white">
+            <th className="py-2 px-4 border w-16 text-center">No.</th>
+            <th className="py-2 px-4 border w-48">Nama</th>
+            <th className="py-2 px-4 border w-64">Email</th>
+            <th className="py-2 px-4 border w-40 text-center">Aksi</th>
+          </tr>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border rounded shadow-md">
-          <thead>
-            <tr className="bg-black text-white">
-              <th className="py-2 px-4 border border-black">ID</th>
-              <th className="py-2 px-4 border border-black">Name</th>
-              <th className="py-2 px-4 border border-black">Email</th>
-              <th className="py-2 px-4 border border-black">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {searchResult.length > 0 ? (
-              searchResult.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-100">
-                  <td className="py-2 px-4 border border-black text-center">{user.id}</td>
-                  <td className={`py-2 px-4 border border-black ${editId === user.id ? 'text-red-500' : ''}`}>
-                    {editId === user.id ? (
-                      <input
-                        type="text"
-                        value={editData.name}
-                        onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                        className="border border-red-500 rounded p-1"
-                      />
-                    ) : (
-                      user.name
-                    )}
+        </thead>
+        <tbody>
+          {currentUsers.map((user) => (
+            <tr key={user.id} className=" hover:bg-gray-100">
+              <td className="py-2 text-center text px-4 border">{user.id}</td>
+
+              {/* Jika dalam mode edit, tampilkan input */}
+              {editId === user.id ? (
+                <>
+                  <td className="py-2 px-4 border">
+                    <input
+                      type="text"
+                      value={editData.name}
+                      onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                      className="w-full px-2 py-1 border border-gray-400 rounded"
+                    />
                   </td>
-                  <td className={`py-2 px-4 border border-black ${editId === user.id ? 'text-red-500' : ''}`}>
-                    {editId === user.id ? (
-                      <input
-                        type="email"
-                        value={editData.email}
-                        onChange={(e) => setEditData({ ...editData, email: e.target.value })}
-                        className="border border-red-500 rounded p-1"
-                      />
-                    ) : (
-                      user.email
-                    )}
+                  <td className="py-2 px-4 border">
+                    <input
+                      type="email"
+                      value={editData.email}
+                      onChange={(e) => setEditData({ ...editData, email: e.target.value })}
+                      className="w-full px-2 py-1 border border-gray-400 rounded"
+                    />
                   </td>
-                  <td className="py-2 px-4 border border-black text-center">
-                    {editId === user.id ? (
-                      <button
-                        className="bg-black text-white px-2 py-1 rounded mr-2"
-                        onClick={() => handleSave(user.id)}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        className="bg-black text-white px-2 py-1 rounded mr-2"
-                        onClick={() => handleEdit(user)}
-                      >
-                        Edit
-                      </button>
-                    )}
-                    <button
-                      className="bg-red-500 text-white px-2 py-1 rounded"
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      Delete
+                </>
+              ) : (
+                <>
+                  <td className="py-2 px-4 border">{user.name}</td>
+                  <td className="py-2 px-4 border">{user.email}</td>
+                </>
+              )}
+
+              <td className="py-2 px-4 border">
+                {editId === user.id ? (
+                  <>
+                    <button className="bg-green-500 text-white px-2 py-1 rounded mr-2" onClick={() => handleSave(user.id)}>
+                      Simpan
                     </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className="py-2 px-4 border text-center text-red-500">
-                  "{searchQuery}" tidak terdaftar
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                    <button className="bg-gray-500 text-white px-2 py-1 rounded" onClick={() => setEditId(null)}>
+                      Batal
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className="bg-black text-white px-2 py-1 rounded mr-2" onClick={() => handleEdit(user)}>
+                      Ubah
+                    </button>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleDelete(user.id)}>
+                      Hapus
+                    </button>
+                  </>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+
+      </table>
+      <br />
+     
+      <div className="flex justify-center items-center mt-6 space-x-4">
+        <button
+          disabled={currentPage === 0}
+          onClick={() => setCurrentPage(prev => prev - 1)}
+          className={`px-5 py-2 rounded text-white font-semibold ${currentPage === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-gray-800"}`}
+        >⬅ Sebelumnya</button>
+
+        <span>Halaman {currentPage + 1} dari {totalPages}</span>
+
+        <button
+          disabled={currentPage + 1 === totalPages || totalPages === 0}
+          onClick={() => setCurrentPage(prev => prev + 1)}
+          className={`px-5 py-2 rounded text-white font-semibold ${currentPage + 1 === totalPages || totalPages === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-800"}`}
+        >Berikutnya ➡</button>
       </div>
       <br />
-      <form onSubmit={handleAddNew} className="mb-4 flex gap-2">
-        <input
-          type="text"
-          placeholder="Nama"
-          value={newUser.name}
-          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-          className="p-2 border border-gray-300 rounded w-1/3"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={newUser.email}
-          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-          className="p-2 border border-gray-300 rounded w-1/3"
-        />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          Add New
-        </button>
-      </form>
+      <h1 className="text-center text-3xl border borde-1 rounded-xl font-extrabold">Tambah Data Pengguna</h1>
+      <br />
+      <div className="flex justify-center items-center">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddUser();
+          }}
+          className="flex space-x-2 w-full max-w-2xl"
+        >
+          <input
+            type="text"
+            placeholder="Nama"
+            className="p-2 border rounded w-2/3 min-w-[250px]"
+            value={newUser.name}
+            onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            className="p-2 border rounded w-2/3 min-w-[250px]"
+            value={newUser.email}
+            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Tambah
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

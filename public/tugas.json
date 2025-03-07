@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "nama_perusahaan": "PT Maju Jaya",
+    "nama_tugas": "Pemasangan Kabel",
+    "keterangan": "Instalasi kabel listrik di gedung perkantoran.",
+    "nama_daerah": "Jakarta Pusat",
+    "status": "Selesai"
+  },
+  {
+    "id": 2,
+    "nama_perusahaan": "CV Sukses Mandiri",
+    "nama_tugas": "Perbaikan AC",
+    "keterangan": "Servis AC di rumah pelanggan.",
+    "nama_daerah": "Bekasi",
+    "status": "Dalam Proses"
+  },
+  {
+    "id": 3,
+    "nama_perusahaan": "UD Karya Bersama",
+    "nama_tugas": "Pengecatan Dinding",
+    "keterangan": "Mengecat ulang dinding rumah tinggal.",
+    "nama_daerah": "Bandung",
+    "status": "Menunggu Konfirmasi"
+  },
+  {
+    "id": 4,
+    "nama_perusahaan": "PT Bangun Sejahtera",
+    "nama_tugas": "Renovasi Atap",
+    "keterangan": "Penggantian atap bocor.",
+    "nama_daerah": "Depok",
+    "status": "Selesai"
+  },
+  {
+    "id": 5,
+    "nama_perusahaan": "CV Jaya Teknik",
+    "nama_tugas": "Instalasi CCTV",
+    "keterangan": "Pemasangan sistem keamanan di toko.",
+    "nama_daerah": "Tangerang",
+    "status": "Dalam Proses"
+  },
+  {
+    "id": 6,
+    "nama_perusahaan": "PT Sentosa Abadi",
+    "nama_tugas": "Perbaikan Saluran Air",
+    "keterangan": "Mengatasi kebocoran pada pipa air.",
+    "nama_daerah": "Bogor",
+    "status": "Menunggu Konfirmasi"
+  },
+  {
+    "id": 7,
+    "nama_perusahaan": "UD Sejahtera Jaya",
+    "nama_tugas": "Pembangunan Pagar",
+    "keterangan": "Pembuatan pagar besi di rumah pelanggan.",
+    "nama_daerah": "Surabaya",
+    "status": "Selesai"
+  },
+  {
+    "id": 8,
+    "nama_perusahaan": "PT Mega Konstruksi",
+    "nama_tugas": "Pengecoran Lantai",
+    "keterangan": "Pengecoran ulang lantai gudang.",
+    "nama_daerah": "Semarang",
+    "status": "Dalam Proses"
+  },
+  {
+    "id": 9,
+    "nama_perusahaan": "CV Karya Teknik",
+    "nama_tugas": "Instalasi Jaringan Internet",
+    "keterangan": "Pemasangan jaringan internet di kantor.",
+    "nama_daerah": "Yogyakarta",
+    "status": "Menunggu Konfirmasi"
+  },
+  {
+    "id": 10,
+    "nama_perusahaan": "UD Makmur Sentosa",
+    "nama_tugas": "Perbaikan Jalan Setapak",
+    "keterangan": "Perbaikan dan perataan jalan setapak desa.",
+    "nama_daerah": "Malang",
+    "status": "Selesai"
+  },
+  {
+    "id": 11,
+    "nama_perusahaan": "PT Cahaya Abadi",
+    "nama_tugas": "Pemasangan Panel Surya",
+    "keterangan": "Instalasi panel surya di atap rumah.",
+    "nama_daerah": "Medan",
+    "status": "Menunggu Konfirmasi"
+  },
+  {
+    "id": 12,
+    "nama_perusahaan": "CV Sentosa Jaya",
+    "nama_tugas": "Perbaikan Plafon",
+    "keterangan": "Perbaikan plafon rusak akibat bocor.",
+    "nama_daerah": "Palembang",
+    "status": "Dalam Proses"
+  },
+  {
+    "id": 13,
+    "nama_perusahaan": "UD Amanah Teknik",
+    "nama_tugas": "Servis Pompa Air",
+    "keterangan": "Perbaikan pompa air di rumah pelanggan.",
+    "nama_daerah": "Makassar",
+    "status": "Selesai"
+  },
+  {
+    "id": 14,
+    "nama_perusahaan": "PT Sukses Konstruksi",
+    "nama_tugas": "Pembangunan Kanopi",
+    "keterangan": "Pemasangan kanopi besi dan kaca.",
+    "nama_daerah": "Bali",
+    "status": "Dalam Proses"
+  },
+  {
+    "id": 15,
+    "nama_perusahaan": "CV Cipta Mandiri",
+    "nama_tugas": "Renovasi Kamar Mandi",
+    "keterangan": "Perombakan total kamar mandi.",
+    "nama_daerah": "Balikpapan",
+    "status": "Menunggu Konfirmasi"
+  },
+  {
+    "id": 16,
+    "nama_perusahaan": "UD Sejahtera Teknik",
+    "nama_tugas": "Perbaikan Lift",
+    "keterangan": "Servis dan pengecekan rutin lift gedung.",
+    "nama_daerah": "Batam",
+    "status": "Selesai"
+  },
+  {
+    "id": 17,
+    "nama_perusahaan": "PT Makmur Sejahtera",
+    "nama_tugas": "Pengecatan Pagar",
+    "keterangan": "Pengecatan ulang pagar besi rumah.",
+    "nama_daerah": "Padang",
+    "status": "Dalam Proses"
+  },
+  {
+    "id": 18,
+    "nama_perusahaan": "CV Jaya Abadi",
+    "nama_tugas": "Perbaikan Instalasi Listrik",
+    "keterangan": "Pemeriksaan dan perbaikan listrik rumah.",
+    "nama_daerah": "Manado",
+    "status": "Menunggu Konfirmasi"
+  },
+  {
+    "id": 19,
+    "nama_perusahaan": "UD Karya Teknik",
+    "nama_tugas": "Pembuatan Tangga Besi",
+    "keterangan": "Pembuatan dan pemasangan tangga besi.",
+    "nama_daerah": "Pontianak",
+    "status": "Selesai"
+  },
+  {
+    "id": 20,
+    "nama_perusahaan": "PT Nusantara Teknik",
+    "nama_tugas": "Perbaikan Genteng",
+    "keterangan": "Penggantian genteng bocor.",
+    "nama_daerah": "Bengkulu",
+    "status": "Dalam Proses"
+  }
+]
