@@ -85,7 +85,6 @@ const Users = () => {
       <br />
       <br />
       <br />
-      <br />
       <h1 className="text-center text-3xl border borde-1 rounded-xl font-extrabold">Data Pengguna</h1>
       <br />
       {message && <p className="text-green-500 text-center mb-4">{message}</p>}

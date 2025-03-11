@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "ruangan": "Kelas",
+    "kapasitas": "30 orang",
+    "harga": "50000",
+    "dibookingOleh": "Andi",
+    "tanggal": "2025-03-12",
+    "status": "Dipesan"
+  },
+  {
+    "id": 2,
+    "ruangan": "Lab Komputer",
+    "kapasitas": "20 orang",
+    "harga": "75000",
+    "dibookingOleh": "Budi",
+    "tanggal": "2025-03-13",
+    "status": "Dipesan"
+  },
+  {
+    "id": 3,
+    "ruangan": "Ruang Dosen",
+    "kapasitas": "10 orang",
+    "harga": "30000",
+    "dibookingOleh": "Citra",
+    "tanggal": "2025-03-14",
+    "status": "Dibatalkan"
+  },
+  {
+    "id": 4,
+    "ruangan": "Ruang Meeting",
+    "kapasitas": "15 orang",
+    "harga": "60000",
+    "dibookingOleh": "Dewi",
+    "tanggal": "2025-03-15",
+    "status": "Dipesan"
+  },
+  {
+    "id": 5,
+    "ruangan": "Perpustakaan",
+    "kapasitas": "50 orang",
+    "harga": "Gratis",
+    "dibookingOleh": "Eko",
+    "tanggal": "2025-03-16",
+    "status": "Selesai"
+  },
+  {
+    "id": 6,
+    "ruangan": "Ruang Istirahat",
+    "kapasitas": "8 orang",
+    "harga": "Gratis",
+    "dibookingOleh": "Fajar",
+    "tanggal": "2025-03-17",
+    "status": "Dipesan"
+  },
+  {
+    "id": 7,
+    "ruangan": "Auditorium",
+    "kapasitas": "100 orang",
+    "harga": "150000",
+    "dibookingOleh": "Gina",
+    "tanggal": "2025-03-18",
+    "status": "Dibatalkan"
+  },
+  {
+    "id": 8,
+    "ruangan": "Ruang Seminar",
+    "kapasitas": "40 orang",
+    "harga": "100000",
+    "dibookingOleh": "Hendra",
+    "tanggal": "2025-03-19",
+    "status": "Dipesan"
+  },
+  {
+    "id": 9,
+    "ruangan": "Lab Elektronika",
+    "kapasitas": "25 orang",
+    "harga": "80000",
+    "dibookingOleh": "Irfan",
+    "tanggal": "2025-03-20",
+    "status": "Selesai"
+  },
+  {
+    "id": 10,
+    "ruangan": "Ruang Rapat",
+    "kapasitas": "12 orang",
+    "harga": "50000",
+    "dibookingOleh": "Joko",
+    "tanggal": "2025-03-21",
+    "status": "Dipesan"
+  }
+]

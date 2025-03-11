@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "kapasitas": "30 orang",
+    "kategori": "Kelas",
+    "price": "50000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 2,
+    "kapasitas": "20 orang",
+    "kategori": "Lab Komputer",
+    "price": "75000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 3,
+    "kapasitas": "10 orang",
+    "kategori": "Ruang Dosen",
+    "price": "30000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 4,
+    "kapasitas": "15 orang",
+    "kategori": "Ruang Meeting",
+    "price": "60000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 5,
+    "kapasitas": "50 orang",
+    "kategori": "Perpustakaan",
+    "price": "Gratis",
+    "status": "Menunggu"
+  },
+  {
+    "id": 6,
+    "kapasitas": "8 orang",
+    "kategori": "Ruang Istirahat",
+    "price": "Gratis",
+    "status": "Menunggu"
+  },
+  {
+    "id": 7,
+    "kapasitas": "100 orang",
+    "kategori": "Auditorium",
+    "price": "150000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 8,
+    "kapasitas": "40 orang",
+    "kategori": "Ruang Seminar",
+    "price": "100000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 9,
+    "kapasitas": "25 orang",
+    "kategori": "Lab Elektronika",
+    "price": "80000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 10,
+    "kapasitas": "12 orang",
+    "kategori": "Ruang Rapat",
+    "price": "50000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 11,
+    "kapasitas": "10 orang",
+    "kategori": "Ruang Diskusi",
+    "price": "40000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 12,
+    "kapasitas": "15 orang",
+    "kategori": "Studio Musik",
+    "price": "90000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 13,
+    "kapasitas": "5 orang",
+    "kategori": "Ruang Podcast",
+    "price": "70000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 14,
+    "kapasitas": "20 orang",
+    "kategori": "Lab Robotika",
+    "price": "85000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 15,
+    "kapasitas": "10 orang",
+    "kategori": "Studio Fotografi",
+    "price": "95000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 16,
+    "kapasitas": "6 orang",
+    "kategori": "Ruang Gaming",
+    "price": "60000",
+    "status": "Menunggu"
+  },
+  {
+    "id": 17,
+    "kapasitas": "12 orang",
+    "kategori": "Ruang Yoga",
+    "price": "50000",
+    "status": "Menunggu"
+  }
+]

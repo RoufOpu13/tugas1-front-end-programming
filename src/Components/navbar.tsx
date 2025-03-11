@@ -20,7 +20,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/" className="block text-white hover:text-gray-300">
+              <Link href="/ruangan" className="block text-white hover:text-gray-300">
                 Ruangan
               </Link>
             </li>
@@ -35,7 +35,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/" className="block text-white hover:text-gray-300">
+              <Link href="/booking" className="block text-white hover:text-gray-300">
                 Booking
               </Link>
             </li>
@@ -48,7 +48,7 @@ export default function Navbar() {
             <Link href="/" className="hover:text-gray-600">Dashboard</Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-gray-600">Ruangan</Link>
+            <Link href="/ruangan" className="hover:text-gray-600">Ruangan</Link>
           </li>
           <li>
             <Link href="/users" className="hover:text-gray-600">Pengguna</Link>
@@ -57,7 +57,7 @@ export default function Navbar() {
             <Link href="/tugas" className="hover:text-gray-600">Tugas</Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-gray-600">Booking</Link>
+            <Link href="/booking" className="hover:text-gray-600">Booking</Link>
           </li>
         </ul>
 
