@@ -9,16 +9,17 @@ interface User {
 
 const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [search, setSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<User[]>([]);
   const [editId, setEditId] = useState<number | null>(null);
   const [editData, setEditData] = useState<{ name: string; email: string }>({ name: "", email: "" });
   const [message, setMessage] = useState("");
   const [newUser, setNewUser] = useState({ name: "", email: "" });
-
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,38 +31,56 @@ const Users = () => {
     fetchData();
   }, []);
 
+  const handleDelete = (id: number) => {
+    const isConfirmed = window.confirm("Apakah Anda yakin ingin menghapus data ini?");
+
+    if (isConfirmed) {
+      const updatedUsers = users.filter(ruangan => ruangan.id !== id);
+      setUsers(updatedUsers);
+      setSearchResult(updatedUsers);
+
+      // Menampilkan alert bahwa data berhasil dihapus
+      alert("Data berhasil dihapus!");
+
+      setTimeout(() => setMessage(""), 2000);
+    }
+  };
+
+  const handleEdit = (user: User) => {
+    setEditId(user.id);
+    setEditData({ name: user.name, email: user.email });
+    setIsEditModalOpen(true); // Buka modal
+  };
+
+  const handleSave = () => {
+    if (!editData.name.trim() || !editData.email.trim()) {
+      setMessage("Nama dan email tidak boleh kosong!");
+      setTimeout(() => setMessage(""), 2000);
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(editData.email)) {
+      setMessage("Format email tidak valid!");
+      setTimeout(() => setMessage(""), 2000);
+      return;
+    }
+
+    const updatedUsers = users.map(user =>
+      user.id === editId ? { ...user, name: editData.name, email: editData.email } : user
+    );
+    setUsers(updatedUsers);
+    setSearchResult(updatedUsers);
+    setIsEditModalOpen(false); // Tutup modal setelah edit selesai
+   alert ('Data Berhasil Diedit');
+    setTimeout(() => setMessage(""), 2000);
+  };
   useEffect(() => {
     const filtered = users.filter(user =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setSearchResult(filtered);
-    setCurrentPage(0); // Reset ke halaman pertama saat pencarian
   }, [searchQuery, users]);
-
-  const handleDelete = (id: number) => {
-    const updatedUsers = searchResult.filter(user => user.id !== id);
-    setUsers(updatedUsers);
-    setSearchResult(updatedUsers);
-    setMessage("Data dihapus");
-    setTimeout(() => setMessage(""), 2000);
-  };
-
-  const handleEdit = (user: User) => {
-    setEditId(user.id);
-    setEditData({ name: user.name, email: user.email });
-  };
-
-  const handleSave = (id: number) => {
-    const updatedUsers = searchResult.map(user =>
-      user.id === id ? { ...user, name: editData.name, email: editData.email } : user
-    );
-    setUsers(updatedUsers);
-    setSearchResult(updatedUsers);
-    setEditId(null);
-    setMessage("Data diedit");
-    setTimeout(() => setMessage(""), 2000);
-  };
 
   const handleAddUser = () => {
     if (!newUser.name || !newUser.email) return;
@@ -71,7 +90,8 @@ const Users = () => {
     setUsers(updatedUsers);
     setSearchResult(updatedUsers);
     setNewUser({ name: "", email: "" });
-    setMessage("User ditambahkan");
+    setModalOpen(false);
+    alert ("User ditambahkan");
     setTimeout(() => setMessage(""), 2000);
   };
 
@@ -80,27 +100,66 @@ const Users = () => {
   const currentUsers = searchResult.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(searchResult.length / itemsPerPage);
 
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <br />
+
       <br />
       <br />
-      <h1 className="text-center text-3xl border borde-1 rounded-xl font-extrabold">Data Pengguna</h1>
-      <br />
+
+        {/* Modal Edit */}
+        {isEditModalOpen && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-2xl font-bold mb-4">Edit Pengguna</h2>
+            
+            <label className="block mb-2">Nama</label>
+            <input
+              type="text"
+              value={editData.name}
+              onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+              className="w-full px-3 py-2 border rounded mb-4"
+            />
+            
+            <label className="block mb-2">Email</label>
+            <input
+              type="email"
+              value={editData.email}
+              onChange={(e) => setEditData({ ...editData, email: e.target.value })}
+              className="w-full px-3 py-2 border rounded mb-4"
+            />
+
+            <div className="flex justify-end space-x-2">
+              <button onClick={() => setIsEditModalOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded">
+                Batal
+              </button>
+              <button onClick={handleSave} className="bg-green-500 text-white px-4 py-2 rounded">
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <h1 className="text-center text-3xl font-extrabold">Data Pengguna</h1>
       {message && <p className="text-green-500 text-center mb-4">{message}</p>}
 
       <input
         type="text"
         placeholder="Cari pengguna..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          setSearchQuery(e.target.value); // Update searchQuery langsung
-        }}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         className="w-full px-4 py-2 border rounded-full"
       />
-      <br />
-      <br />
+      <button
+        onClick={() => setModalOpen(true)}
+        className="mt-4 bg-black text-white px-4 py-2 rounded"
+      >
+        Tambah Pengguna
+      </button>
+
+      
       <table className="min-w-full bg-white border rounded shadow-md">
         <thead>
           <tr className="bg-black text-white">
@@ -116,53 +175,14 @@ const Users = () => {
             <tr key={user.id} className=" hover:bg-gray-100">
               <td className="py-2 text-center text px-4 border">{user.id}</td>
 
-              {/* Jika dalam mode edit, tampilkan input */}
-              {editId === user.id ? (
-                <>
-                  <td className="py-2 px-4 border">
-                    <input
-                      type="text"
-                      value={editData.name}
-                      onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                      className="w-full px-2 py-1 border border-gray-400 rounded"
-                    />
-                  </td>
-                  <td className="py-2 px-4 border">
-                    <input
-                      type="email"
-                      value={editData.email}
-                      onChange={(e) => setEditData({ ...editData, email: e.target.value })}
-                      className="w-full px-2 py-1 border border-gray-400 rounded"
-                    />
-                  </td>
-                </>
-              ) : (
-                <>
                   <td className="py-2 px-4 border">{user.name}</td>
                   <td className="py-2 px-4 border">{user.email}</td>
-                </>
-              )}
 
               <td className="py-2 px-4 border">
-                {editId === user.id ? (
-                  <>
-                    <button className="bg-green-500 text-white px-2 py-1 rounded mr-2" onClick={() => handleSave(user.id)}>
-                      Simpan
-                    </button>
-                    <button className="bg-gray-500 text-white px-2 py-1 rounded" onClick={() => setEditId(null)}>
-                      Batal
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button className="bg-black text-white px-2 py-1 rounded mr-2" onClick={() => handleEdit(user)}>
-                      Ubah
-                    </button>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleDelete(user.id)}>
-                      Hapus
-                    </button>
-                  </>
-                )}
+                <button className="bg-black text-white px-2 py-1 rounded mr-2" onClick={() => handleEdit(user)}>
+                  Ubah
+                </button>
+                <button className="bg-red-500 text-white px-2 py-1 rounded mr-2" onClick={() => handleDelete(user.id)}>Hapus</button>
               </td>
             </tr>
           ))}
@@ -170,7 +190,8 @@ const Users = () => {
 
       </table>
       <br />
-     
+      <div />
+
       <div className="flex justify-center items-center mt-6 space-x-4">
         <button
           disabled={currentPage === 0}
@@ -183,43 +204,50 @@ const Users = () => {
         <button
           disabled={currentPage + 1 === totalPages || totalPages === 0}
           onClick={() => setCurrentPage(prev => prev + 1)}
-          className={`px-5 py-2 rounded text-white font-semibold ${currentPage + 1 === totalPages || totalPages === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-800"}`}
+          className={`px-5 py-2 rounded text-white font-semibold ${currentPage + 1 === totalPages || totalPages === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-blue-400"}`}
         >Berikutnya ➡</button>
       </div>
-      <br />
-      <h1 className="text-center text-3xl border borde-1 rounded-xl font-extrabold">Tambah Data Pengguna</h1>
-      <br />
-      <div className="flex justify-center items-center">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleAddUser();
-          }}
-          className="flex space-x-2 w-full max-w-2xl"
-        >
-          <input
-            type="text"
-            placeholder="Nama"
-            className="p-2 border rounded w-2/3 min-w-[250px]"
-            value={newUser.name}
-            onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Email"
-            className="p-2 border rounded w-2/3 min-w-[250px]"
-            value={newUser.email}
-            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Tambah
-          </button>
-        </form>
-      </div>
+
+
+
+      {modalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-lg font-bold mb-4">Tambah Pengguna</h2>
+            <input
+              type="text"
+              placeholder="Nama"
+              className="p-2 border rounded w-full mb-2"
+              value={newUser.name}
+              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="p-2 border rounded w-full mb-4"
+              value={newUser.email}
+              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => setModalOpen(false)}
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleAddUser}
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                Tambah
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+
+
   );
 };
 
